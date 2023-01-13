@@ -1,4 +1,4 @@
-**Project TravelBlog**
+**Project LimTravelling Blog website**
 <br>
 This is project using Backend Golang (Framework GORM+GIN)<br>
 <br>
@@ -8,7 +8,7 @@ This is project using Backend Golang (Framework GORM+GIN)<br>
     - `go run main.go`
 ### Folder Structure Project
 ```
-`DTPT-GOLANG`
+`LimTravelling Blog API`
 |__ common (shared components between features)
 |
 |__ module
