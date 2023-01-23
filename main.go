@@ -34,7 +34,7 @@ func main() {
 		v1.GET("/users", usergin.GetListUserHandler(db))
 
 		v1.GET("/articles/:article_id", articlegin.GetArticle(db)) // get user with id
-		v1.PUT("/articles/:article_id", articlegin.GetListArticleHandler(db))
+		v1.PUT("/articles/:article_id", articlegin.UpdateArticleHandler(db))
 		v1.DELETE("/articles/:article_id", articlegin.DeleteArticleHandler(db))
 		v1.POST("/articles", articlegin.CreateArticleHandler(db))
 		v1.GET("/articles", articlegin.GetListArticleHandler(db)) // get all user

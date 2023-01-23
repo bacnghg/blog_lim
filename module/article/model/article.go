@@ -48,7 +48,7 @@ type ArticleUpdate struct {
 	ArticleId   string `json:"article_id" gorm:"column:id"`
 	Title       string `json:"title" gorm:"column:title"`
 	Description string `json:"description" gorm:"column:description"`
-	UsereId     string `json:"user_id" gorm:"column:user_id;"`
+	UsereId     string `json:"user_id" gorm:"column:user_id"`
 	Category    string `json:"category" gorm:"column:category"`
 	CreatedAt   string `json:"created_at" gorm:"column:created_at"`
 	UpdatedAt   string `json:"updated_at" gorm:"column:updated_at"`
