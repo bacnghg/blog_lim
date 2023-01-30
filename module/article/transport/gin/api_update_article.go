@@ -16,7 +16,7 @@ func UpdateArticleHandler(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data articlemodel.ArticleUpdate
 
-		id, err := strconv.Atoi(c.Param("user_id"))
+		id, err := strconv.Atoi(c.Param("article_id"))
 
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err})
