@@ -5,4 +5,5 @@ type FilterArticle struct {
 	Title       string `json:"title" form:"title"`
 	Description string `json:"description" form:"description"`
 	UsereId     int    `json:"user_id" form:"user_id"`
+	Category    int    `json:"category" gorm:"column:category"`
 }

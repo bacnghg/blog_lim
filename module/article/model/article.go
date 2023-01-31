@@ -45,7 +45,7 @@ type ArticleUpdate struct {
 	Title       string `json:"title" gorm:"column:title"`
 	Description string `json:"description" gorm:"column:description"`
 	UsereId     string `json:"user_id" gorm:"column:user_id"`
-	Category    string `json:"category" gorm:"column:category"`
+	Category    int    `json:"category" gorm:"column:category"`
 }
 
 func (ArticleUpdate) TableName() string {
