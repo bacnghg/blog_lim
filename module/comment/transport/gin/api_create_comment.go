@@ -16,7 +16,7 @@ func CreateCommentHandler(db *gorm.DB) gin.HandlerFunc {
 		var data commentmodel.CommentCreate
 
 		if err := c.ShouldBind(&data); err != nil {
-			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest, err.Error()))
 			return
 		}
 
@@ -24,7 +24,7 @@ func CreateCommentHandler(db *gorm.DB) gin.HandlerFunc {
 		business := commentbusiness.NewCreateComment(storage)
 
 		if err := business.CreateComment(c.Request.Context(), &data); err != nil {
-			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest, err.Error()))
 			return
 		}
 		c.JSON(http.StatusOK, common.SimpleSuccessResponse(data))
