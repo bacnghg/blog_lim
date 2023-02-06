@@ -14,8 +14,7 @@ import (
 func GetComment(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		// id, err := strconv.Atoi(c.Param("user_id"))
-		id, err := strconv.Atoi(c.Param("user_id"))
+		id, err := strconv.Atoi(c.Param("comment_id"))
 
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -29,7 +28,7 @@ func GetComment(db *gorm.DB) gin.HandlerFunc {
 		data, err := business.FindComment(c.Request.Context(), id)
 
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()) )
 			return
 		}
 

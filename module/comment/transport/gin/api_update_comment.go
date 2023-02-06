@@ -16,23 +16,23 @@ func UpdateCommentHandler(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var data commentmodel.CommentUpdate
 
-		id, err := strconv.Atoi(c.Param("user_id"))
+		id, err := strconv.Atoi(c.Param("comment_id"))
 
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err})
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
 			return
 		}
 
 		if err := c.ShouldBind(&data); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
 			return
 		}
 
 		storage := commentstorage.NewDbStore(db)
 		business := commentbusiness.UpdateCommentBusiness(storage)
 
-		if err := business.UpdateCommentById(c.Request.Context(), id, &data); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		if err := business.UpdateCommentBusiness(c.Request.Context(), id, &data); err != nil {
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
 			return
 		}
 

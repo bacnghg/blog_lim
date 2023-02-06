@@ -2,18 +2,15 @@ package commentmodel
 
 import (
 	"errors"
+	"gin_form/common"
 	"strings"
 )
 
 type Comment struct {
-	CommentId   string `json:"comment_id" gorm:"column:id"`
-	Title       string `json:"title" gorm:"column:title"`
-	Description string `json:"description" gorm:"column:description"`
-	UsereId     string `json:"user_id" gorm:"column:user_id"`
-	Category    string `json:"category" gorm:"column:category"`
-	CreatedAt   string `json:"created_at" gorm:"column:created_at"`
-	UpdatedAt   string `json:"updated_at" gorm:"column:updated_at"`
-	DeletedAt   string `json:"deleted_at" gorm:"column:deleted_at"`
+	common.SQLModel
+	UserId      int `json:"user_id" gorm:"column:user_id"`
+	ArticlesId  int `json:"articles_id" gorm:"column:articles_id"`
+	Description string `json:"description" gorm:"column:description;"`
 }
 
 func (Comment) TableName() string {
@@ -21,11 +18,10 @@ func (Comment) TableName() string {
 }
 
 type CommentCreate struct {
-	CommentId   string `json:"comment_id" gorm:"column:id"`
-	Title       string `json:"title" gorm:"column:title"`
-	Description string `json:"description" gorm:"column:description"`
-	UsereId     string `json:"user_id" gorm:"column:user_id;"`
-	Category    string `json:"category" gorm:"column:category"`
+	Id      int    `json:"id" gorm:"column:id;"`
+	UserId      int    `json:"user_id" gorm:"column:user_id;"`
+	ArticlesId  int `json:"articles_id" gorm:"column:articles_id;"`
+	Description string `json:"description" gorm:"column:description;"`
 }
 
 func (CommentCreate) TableName() string {
@@ -33,11 +29,8 @@ func (CommentCreate) TableName() string {
 }
 
 func (res *CommentCreate) Validate() error {
-	res.Title = strings.TrimSpace(res.Title)
+	res.Description = strings.TrimSpace(res.Description)
 
-	if len(res.Title) == 0 {
-		return errors.New("Title can't be blank")
-	}
 	if len(res.Description) == 0 {
 		return errors.New("Description can't be blank")
 	}
@@ -45,14 +38,7 @@ func (res *CommentCreate) Validate() error {
 }
 
 type CommentUpdate struct {
-	CommentId   string `json:"comment_id" gorm:"column:id"`
-	Title       string `json:"title" gorm:"column:title"`
-	Description string `json:"description" gorm:"column:description"`
-	UsereId     string `json:"user_id" gorm:"column:user_id;"`
-	Category    string `json:"category" gorm:"column:category"`
-	CreatedAt   string `json:"created_at" gorm:"column:created_at"`
-	UpdatedAt   string `json:"updated_at" gorm:"column:updated_at"`
-	DeletedAt   string `json:"deleted_at" gorm:"column:deleted_at"`
+	Description   string `json:"description" gorm:"column:description;"`
 }
 
 func (CommentUpdate) TableName() string {
@@ -60,11 +46,8 @@ func (CommentUpdate) TableName() string {
 }
 
 func (res *CommentUpdate) Validate() error {
-	res.Title = strings.TrimSpace(res.Title)
+	res.Description = strings.TrimSpace(res.Description)
 
-	if len(res.Title) == 0 {
-		return errors.New("Title can't be blank")
-	}
 	if len(res.Description) == 0 {
 		return errors.New("Description can't be blank")
 	}

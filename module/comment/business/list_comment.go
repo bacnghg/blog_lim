@@ -9,7 +9,7 @@ import (
 type ListCommentStore interface {
 	ListComment(
 		ctx context.Context,
-		filter *commentmodel.FilterComment,
+		filter *commentmodel.Filter,
 		paging *common.Paging,
 		morekeys ...string,
 	) ([]commentmodel.Comment, error)
@@ -25,7 +25,7 @@ func ListCommentBusiness(store ListCommentStore) *listCommentStruct {
 
 func (business *listCommentStruct) ListComment(
 	ctx context.Context,
-	filter *commentmodel.FilterComment,
+	filter *commentmodel.Filter,
 	paging *common.Paging,
 ) ([]commentmodel.Comment, error) {
 	result, err := business.store.ListComment(ctx, filter, paging)

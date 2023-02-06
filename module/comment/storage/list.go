@@ -8,7 +8,7 @@ import (
 
 func (store sqlStore) ListComment(
 	ctx context.Context,
-	filter *commentmodel.FilterComment,
+	filter *commentmodel.Filter,
 	paging *common.Paging,
 	morekeys ...string,
 ) ([]commentmodel.Comment, error) {
@@ -18,17 +18,14 @@ func (store sqlStore) ListComment(
 	var result []commentmodel.Comment
 
 	db := store.db
-	if v := filter.CommentId; v > 0 {
-		db = db.Where("id = ?", v)
+	if v := filter.ArticleId; v > 0 {
+		db = db.Where("articles_id = ?", v)
 	}
-	if v := filter.Title; v != "" {
-		db = db.Where("title = ?", v)
+	if v := filter.UserId; v > 0 {
+		db = db.Where("user_id = ?", v)
 	}
 	if v := filter.Description; v != "" {
-		db = db.Where("description = ?", v)
-	}
-	if v := filter.UsereId; v > 0 {
-		db = db.Where("user_id = ?", v)
+		db = db.Where("description like ?", "%"+v+"%")
 	}
 	if err := db.Table(commentmodel.Comment{}.TableName()).
 		Count(&paging.Total).

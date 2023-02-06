@@ -2,11 +2,16 @@ package commentstorage
 
 import (
 	"context"
-	commentmodel "gin_form/module/comment/model"
+
+	"gorm.io/gorm"
 )
 
+type Comment struct {
+	ID int
+	DeletedAt gorm.DeletedAt
+}
 func (store *sqlStore) DeleteComment(ctx context.Context, id int) error {
-	if err := store.db.Model(commentmodel.Comment{}).Where("id = ? ", id).Delete(nil).Error; err != nil {
+	if err := store.db.Where("id = ? ", id).Delete(&Comment{}).Error; err != nil {
 		return err
 	}
 	return nil

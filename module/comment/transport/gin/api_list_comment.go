@@ -17,14 +17,14 @@ func GetListCommentHandler(db *gorm.DB) gin.HandlerFunc {
 		var paging common.Paging
 
 		if err := c.ShouldBind(&paging); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
 			return
 		}
 
-		var filter commentmodel.FilterComment
+		var filter commentmodel.Filter
 
 		if err := c.ShouldBind(&filter); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
 			return
 		}
 
@@ -35,7 +35,7 @@ func GetListCommentHandler(db *gorm.DB) gin.HandlerFunc {
 
 		result, err := business.ListComment(c.Request.Context(), &filter, &paging)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
 			return
 		}
 

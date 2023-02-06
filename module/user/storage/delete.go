@@ -2,11 +2,16 @@ package userstorage
 
 import (
 	"context"
-	usermodel "gin_form/module/user/model"
+	"gorm.io/gorm"
 )
 
+type User struct {
+	ID      int
+	DeletedAt gorm.DeletedAt
+}
+  
 func (store *sqlStore) DeleteUser(ctx context.Context, id int) error {
-	if err := store.db.Model(usermodel.User{}).Where("id = ? ", id).Delete(nil).Error; err != nil {
+	if err := store.db.Where("id = ? ", id).Delete(&User{}).Error; err != nil {
 		return err
 	}
 	return nil

@@ -27,6 +27,7 @@ func GetListUserHandler(db *gorm.DB) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
+		paging.Limit = 1
 
 		paging.Validate()
 

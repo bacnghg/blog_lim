@@ -14,6 +14,7 @@ import (
 
 func UpdateArticleHandler(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
+
 		var data articlemodel.ArticleUpdate
 
 		id, err := strconv.Atoi(c.Param("article_id"))

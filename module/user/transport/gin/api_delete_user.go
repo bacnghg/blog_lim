@@ -26,7 +26,8 @@ func DeleteUserHandler(db *gorm.DB) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		c.JSON(http.StatusOK, common.SimpleSuccessResponse(true))
+
+		c.JSON(http.StatusOK, common.SimpleSuccessResponse(gin.H{"success": true}))
 
 	}
 }

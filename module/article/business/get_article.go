@@ -22,6 +22,8 @@ type findArticleBusiness struct {
 }
 
 func (business *findArticleBusiness) FindArticle(ctx context.Context, id int) (*articlemodel.Article, error) {
+
+	// data, err := business.store.FindArticle(ctx, map[string]interface{}{"id": id})
 	data, err := business.store.FindArticle(ctx, map[string]interface{}{"id": id})
 
 	if err != nil {

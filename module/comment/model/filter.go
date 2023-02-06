@@ -1,8 +1,7 @@
 package commentmodel
 
-type FilterComment struct {
-	CommentId   int    `json:"comment_id" form:"comment_id"`
-	Title       string `json:"title" form:"title"`
+type Filter struct {
+	ArticleId   int    `json:"articles_id" form:"articles_id"`
+	UserId      int    `json:"user_id" form:"user_id"`
 	Description string `json:"description" form:"description"`
-	UsereId     int    `json:"user_id" form:"user_id"`
 }

@@ -27,7 +27,7 @@ type updateCommentBusiness struct {
 	store UpdateCommentStore
 }
 
-func (business *updateCommentBusiness) UpdateCommentById(ctx context.Context, id int, data *commentmodel.CommentUpdate) error {
+func (business *updateCommentBusiness) UpdateCommentBusiness(ctx context.Context, id int, data *commentmodel.CommentUpdate) error {
 	_, err := business.store.FindComment(ctx, map[string]interface{}{"id": id})
 	if err != nil {
 		return err

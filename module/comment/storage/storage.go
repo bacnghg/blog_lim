@@ -1,4 +1,4 @@
-package articlestorage
+package commentstorage
 
 import "gorm.io/gorm"
 

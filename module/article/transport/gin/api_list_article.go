@@ -12,6 +12,7 @@ import (
 )
 
 func GetListArticleHandler(db *gorm.DB) gin.HandlerFunc {
+
 	return func(c *gin.Context) {
 
 		var paging common.Paging

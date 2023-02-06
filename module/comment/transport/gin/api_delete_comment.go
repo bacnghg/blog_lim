@@ -13,7 +13,7 @@ import (
 
 func DeleteCommentHandler(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		id, err := strconv.Atoi(c.Param("id"))
+		id, err := strconv.Atoi(c.Param("comment_id"))
 
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -24,7 +24,7 @@ func DeleteCommentHandler(db *gorm.DB) gin.HandlerFunc {
 		business := commentbusiness.NewDeleteComment(storage)
 
 		if err := business.DeleteComment(c.Request.Context(), id); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, common.SimpleErrorResponse(http.StatusBadRequest,err.Error()))
 			return
 		}
 		c.JSON(http.StatusOK, common.SimpleSuccessResponse(true))
